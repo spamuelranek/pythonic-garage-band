@@ -24,15 +24,11 @@ def test_guitarist_repr():
     expected = "Guitarist instance. Name = Joan Jett"
     assert actual == expected
 
-
-
 def test_drummer_str():
     sheila = Drummer("Sheila E.")
     actual = str(sheila)
     expected = "My name is Sheila E. and I play drums"
     assert actual == expected
-
-
 
 def test_drummer_repr():
     sheila = Drummer("Sheila E.")
@@ -90,7 +86,6 @@ def test_instruments(one_band):
         assert member.get_instrument() == instruments[i]
 
 
-
 def test_individual_solos(one_band):
     for member in one_band.members:
         if member.get_instrument() == "guitar":
@@ -99,7 +94,6 @@ def test_individual_solos(one_band):
             assert member.play_solo() == "bom bom buh bom"
         elif member.get_instrument() == "drums":
             assert member.play_solo() == "rattle boom crash"
-
 
 
 def test_band_members(one_band):
@@ -119,14 +113,12 @@ def test_band_members(one_band):
     assert one_band.members[2].name == "Dave Grohl"
 
 
-
 def test_play_solos_for_whole_band(one_band):
     solos = one_band.play_solos()
     assert len(solos) == 3
     assert solos[0] == "face melting guitar solo"
     assert solos[1] == "bom bom buh bom"
     assert solos[2] == "rattle boom crash"
-
 
 
 def test_class_tracks_instances():
@@ -136,13 +128,28 @@ def test_class_tracks_instances():
     assert Band.instances[0] == the_nobodies
 
 
-
 def test_to_list():
     assert Band.to_list() == []
     the_nobodies = Band("The Nobodies", [])
     all_bands = Band.to_list()
     assert len(all_bands) == 1
     assert all_bands[0] == the_nobodies
+
+def test_band_str(one_band):
+    actual = str(one_band)
+    expected ="""Hello, we are Nirvana
+My name is Kurt Cobain and I play guitar
+My name is Krist Novoselic and I play bass
+My name is Dave Grohl and I play drums"""
+    assert actual == expected
+
+def test_band_repr(one_band):
+    actual = repr(one_band)
+    expected = """Nirvana Members: 3
+Guitarist instance. Name = Kurt Cobain
+Bassist instance. Name = Krist Novoselic
+Drummer instance. Name = Dave Grohl
+"""
 
 
 #######################
@@ -191,18 +198,18 @@ def clean():
 #######################
 
 
-# @pytest.mark.skip("stretch")
-# def test_from_file():
-#     with open("assets/bands.json") as f:
-#         bands = json.loads(f.read())
+@pytest.mark.skip("stretch")
+def test_from_file():
+    with open("assets/bands.json") as f:
+        bands = json.loads(f.read())
 
-#     assert len(bands) == 1
+    assert len(bands) == 1
 
-#     nirvana_data = bands[0]
+    nirvana_data = bands[0]
 
-#     nirvana = Band(nirvana_data["name"], nirvana_data["members"])
+    nirvana = Band(nirvana_data["name"], nirvana_data["members"])
 
-#     assert nirvana.name == "Nirvana"
+    assert nirvana.name == "Nirvana"
 
 
 # @pytest.mark.skip("stretch")

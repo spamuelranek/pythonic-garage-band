@@ -1,3 +1,5 @@
+# def make_json_band():
+  
 class Musician:
   instrument =""
   title = ""
@@ -14,7 +16,6 @@ class Musician:
   def get_instrument(self):
     return f"{self.instrument}"
 
-  pass
 
 class Guitarist(Musician):
   instrument = "guitar"
@@ -24,15 +25,12 @@ class Guitarist(Musician):
     return "face melting guitar solo"
 
 
-
-
 class Bassist(Musician):
   instrument = "bass"
   title = "Bassist"
   
   def play_solo(self):
     return "bom bom buh bom"
-
 
 
 class Drummer(Musician):
@@ -58,7 +56,34 @@ class Band:
       solo_list.append(member.play_solo())
     return solo_list
 
+  def __str__(self):
+    intros = f"Hello, we are {self.name}"
+    for member in self.members:
+      intros = intros + "\n" + str(member)
+    return intros
+
+  def __repr__(self):
+    intros = f"{self.name} Members: {len(self.members)}"
+    for member in self.members:
+      intros = intros + "\n" + repr(member)
+    return intros
+
   @classmethod
   def to_list(cls):
     return cls.instances
-  pass
+
+if __name__ == "__main__":
+  def one_band():
+    members = [
+        Guitarist("Kurt Cobain"),
+        Bassist("Krist Novoselic"),
+        Drummer("Dave Grohl"),
+    ]
+
+    some_band = Band("Nirvana", members)
+
+    return some_band
+  
+  new_band = one_band()
+  print(str(new_band))
+
